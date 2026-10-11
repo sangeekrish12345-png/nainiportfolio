@@ -1,0 +1,1051 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070b14">
+    <title>Nayana K | Developer Portfolio</title>
+
+    <style>
+        :root {
+            --bg: #070b14;
+            --card: #111827;
+            --text: #f3f4f6;
+            --muted: #aab4c5;
+            --accent: #00d9ff;
+            --border: #263244;
+            --header: rgba(17, 24, 39, 0.94);
+            --shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        body.light {
+            --bg: #f4f7fb;
+            --card: #ffffff;
+            --text: #172033;
+            --muted: #566176;
+            --accent: #007b9e;
+            --border: #d6deea;
+            --header: rgba(255, 255, 255, 0.94);
+            --shadow: 0 15px 35px rgba(30, 50, 80, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button, input, textarea {
+            font: inherit;
+        }
+
+        button, .btn {
+            cursor: pointer;
+        }
+
+        button:focus-visible, a:focus-visible,
+        input:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--header);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 7%;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            transition: color 0.25s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button, .btn {
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            background: var(--accent);
+            color: #07111b;
+            font-weight: bold;
+            display: inline-block;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        button:hover, .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.15);
+        }
+
+        #themeToggle {
+            font-size: 18px;
+            min-width: 43px;
+            padding: 8px;
+        }
+
+        .menu-toggle {
+            display: none;
+            min-width: 43px;
+            padding: 8px;
+            font-size: 19px;
+        }
+
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            padding: 75px 8%;
+            background:
+                radial-gradient(circle at 80% 30%,
+                rgba(0, 217, 255, 0.13), transparent 35%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            right: 8%;
+            bottom: 10%;
+            border: 1px solid rgba(0, 217, 255, 0.18);
+            border-radius: 50%;
+            box-shadow:
+                0 0 0 25px rgba(0, 217, 255, 0.025),
+                0 0 0 50px rgba(0, 217, 255, 0.025);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+            animation: appear 0.9s ease;
+        }
+
+        .tag {
+            color: var(--accent);
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 13px;
+        }
+
+        h1 {
+            font-size: clamp(36px, 6vw, 65px);
+            line-height: 1.2;
+            margin: 15px 0;
+        }
+
+        h2 {
+            color: var(--accent);
+            margin-bottom: 22px;
+            font-size: 30px;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: var(--muted);
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .outline-btn {
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        section {
+            padding: 75px 8%;
+            scroll-margin-top: 80px;
+        }
+
+        .section-intro {
+            margin-bottom: 30px;
+        }
+
+        .section-intro > p {
+            max-width: 780px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            min-width: 0;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 23px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, border-color 0.3s,
+                        background 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill {
+            border: 1px solid var(--border);
+            color: var(--accent);
+            background: var(--card);
+            padding: 10px 16px;
+            border-radius: 8px;
+            transition: transform 0.25s, border-color 0.25s;
+        }
+
+        .skill:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .project-label {
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .certificate-image {
+            width: 100%;
+            height: 190px;
+            object-fit: contain;
+            background: var(--bg);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .certificate-card {
+            text-align: center;
+        }
+
+        .certificate-card button {
+            margin-top: 15px;
+        }
+
+        .contact-form-card {
+            grid-column: span 2;
+        }
+
+        form {
+            display: grid;
+            gap: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 13px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: var(--muted);
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        #formMessage {
+            overflow-wrap: anywhere;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid var(--border);
+            background: var(--card);
+        }
+
+        /* Certificate preview */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, 0.92);
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal img {
+            max-width: 95%;
+            max-height: 85vh;
+            object-fit: contain;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 22px;
+        }
+
+        /* Back-to-top button */
+        #backToTop {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 90;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            padding: 0;
+            font-size: 23px;
+            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: opacity 0.3s, visibility 0.3s,
+                        transform 0.3s;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1050px) {
+            .nav-links {
+                gap: 12px;
+                font-size: 14px;
+            }
+
+            header {
+                padding-left: 4%;
+                padding-right: 4%;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .menu-toggle {
+                display: inline-block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                padding: 22px;
+                background: var(--header);
+                flex-direction: column;
+                align-items: stretch;
+                border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 7px 10px;
+            }
+
+            .hero::after {
+                right: -100px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            header {
+                padding: 12px 5%;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form-card {
+                grid-column: auto;
+            }
+
+            section {
+                padding: 55px 6%;
+            }
+
+            .hero {
+                min-height: 75vh;
+                padding: 60px 6%;
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+
+            .hero::after {
+                width: 140px;
+                height: 140px;
+                right: -75px;
+                bottom: 4%;
+            }
+
+            #backToTop {
+                right: 15px;
+                bottom: 15px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation: none !important;
+                transition: none !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <a href="#home" class="logo">NAYANA K.</a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#certificates">Certificates</a>
+            <a href="#education">Education</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+            <button id="themeToggle"
+                    aria-label="Switch to light mode"
+                    title="Change colour theme">☀️</button>
+
+            <button class="menu-toggle" id="menuToggle"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false">☰</button>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <!-- HOME -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="tag">HELLO, WELCOME TO MY PORTFOLIO</p>
+
+            <h1>Hi, I'm <span style="color:var(--accent)">Nayana K</span></h1>
+
+            <h2 id="typingText" aria-live="polite">
+                BCA Student & Full Stack Developer
+            </h2>
+
+            <p>
+                I am a BCA student passionate about web development,
+                programming and building useful digital applications.
+                I enjoy learning new technologies and improving my skills.
+            </p>
+
+            <div class="hero-buttons">
+                <a class="btn" href="#projects">Explore My Projects</a>
+                <a class="btn outline-btn" href="#contact">Contact Me</a>
+                <a class="btn outline-btn"
+                   href="https://github.com/sangeekrish12345-png"
+                   target="_blank" rel="noopener noreferrer">My GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="section-intro reveal">
+            <h2>About Me</h2>
+            <p>
+                I am a BCA student specialising in Full Stack Development.
+                I am interested in designing websites, developing applications
+                and learning both frontend and backend technologies.
+                My goal is to become a skilled software developer.
+            </p>
+        </div>
+
+        <div class="grid">
+            <div class="card reveal">
+                <h3>💡 My Interest</h3>
+                <p>Web development, programming and software applications.</p>
+            </div>
+
+            <div class="card reveal">
+                <h3>🎯 My Goal</h3>
+                <p>To become a professional developer and build useful applications.</p>
+            </div>
+
+            <div class="card reveal">
+                <h3>📚 My Learning</h3>
+                <p>Continuously improving my coding and problem-solving skills.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="section-intro reveal">
+            <h2>My Skills</h2>
+            <p>Technologies I have learned or am learning.</p>
+        </div>
+
+        <div class="skills reveal">
+            <span class="skill">HTML</span>
+            <span class="skill">CSS</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">Python</span>
+            <span class="skill">Flask</span>
+            <span class="skill">Node.js</span>
+            <span class="skill">SQL</span>
+            <span class="skill">Git</span>
+            <span class="skill">GitHub</span>
+            <span class="skill">Responsive Design</span>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="section-intro reveal">
+            <h2>My Projects</h2>
+            <p>Some of my development work and project ideas.</p>
+        </div>
+
+        <div class="grid">
+            <article class="card reveal">
+                <p class="project-label">COMPLETED PROJECT</p>
+                <h3>🧮 JavaScript Calculator</h3>
+                <p>
+                    A calculator built using HTML, CSS and JavaScript
+                    to perform basic mathematical operations.
+                </p>
+                <p style="margin-top:15px">
+                    <strong>Technologies:</strong> HTML, CSS, JavaScript
+                </p>
+            </article>
+
+            <article class="card reveal">
+                <p class="project-label">PLANNED PROJECT</p>
+                <h3>👗 Online Clothes & Costumes Rental</h3>
+                <p>
+                    A planned application for managing clothes and costume
+                    rentals, with features to create, view, update and delete
+                    rental records.
+                </p>
+                <p style="margin-top:15px">
+                    <strong>Technologies:</strong> Node.js, SQLite and web technologies
+                </p>
+            </article>
+
+            <article class="card reveal">
+                <p class="project-label">FUTURE LEARNING</p>
+                <h3>🚀 Future Projects</h3>
+                <p>
+                    I plan to build more projects to improve my full stack
+                    development skills and practical knowledge.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates">
+        <div class="section-intro reveal">
+            <h2>My Certifications</h2>
+            <p>My learning achievements and certificates.</p>
+            <p>Replace the sample image paths with your certificate photos.</p>
+        </div>
+
+        <div class="grid">
+            <article class="card certificate-card reveal">
+                <img class="certificate-image"
+                     src="certificates/advanced-excel.jpeg"
+                     alt="Advanced Excel Certificate">
+
+                <h3>Advanced Excel</h3>
+                <p>Certificate in Advanced Excel.</p>
+
+                <button class="view-certificate"
+                        data-image="certificates/advanced-excel.jpeg">
+                    View Certificate
+                </button>
+            </article>
+
+            <article class="card certificate-card reveal">
+                <img class="certificate-image"
+                     src="certificates/basic-python.jpeg"
+                     alt="Basic Python Certificate">
+
+                <h3>Basic Python</h3>
+                <p>Certificate in Basic Python.</p>
+
+                <button class="view-certificate"
+                        data-image="certificates/basic-python.jpeg">
+                    View Certificate
+                </button>
+            </article>
+
+            <article class="card certificate-card reveal">
+                <img class="certificate-image"
+                     src="certificates/data-analytics.jpeg"
+                     alt="Data Analytics Certificate">
+
+                <h3>Data Analytics</h3>
+                <p>Certificate in Data Analytics.</p>
+
+                <button class="view-certificate"
+                        data-image="certificates/data-analytics.jpeg">
+                    View Certificate
+                </button>
+            </article>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+        <div class="section-intro reveal">
+            <h2>Education</h2>
+        </div>
+
+        <div class="card reveal">
+            <h3>Bachelor of Computer Applications (BCA)</h3>
+            <p>Bangalore University</p>
+            <p>Specialisation: Full Stack Development</p>
+            <p>Currently pursuing my degree.</p>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="section-intro reveal">
+            <h2>Contact Me</h2>
+            <p>
+                Feel free to contact me regarding my projects,
+                learning journey or development interests.
+            </p>
+        </div>
+
+        <div class="grid">
+            <div class="card reveal">
+                <h3>📧 Email</h3>
+                <p>
+                    <a href="mailto:nayanak@gmail.com">
+                        nayanak@gmail.com
+                    </a>
+                </p>
+
+                <h3 style="margin-top:20px">💻 GitHub</h3>
+                <p>
+                    <a href="https://github.com/sangeekrish12345-png"
+                       target="_blank" rel="noopener noreferrer">
+                        Visit My GitHub Profile
+                    </a>
+                </p>
+            </div>
+
+            <div class="card reveal contact-form-card">
+                <form id="contactForm">
+                    <input type="text" id="name"
+                           placeholder="Your Name"
+                           autocomplete="name" required>
+
+                    <input type="email" id="email"
+                           placeholder="Your Email"
+                           autocomplete="email" required>
+
+                    <textarea id="message"
+                              placeholder="Your Message"
+                              required></textarea>
+
+                    <button type="submit">Prepare Email</button>
+                    <p id="formMessage" aria-live="polite"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>Designed and developed by Nayana K.</p>
+    <p>© <span id="year"></span> My Developer Portfolio</p>
+</footer>
+
+<!-- CERTIFICATE PREVIEW -->
+<div class="modal" id="certificateModal"
+     role="dialog" aria-modal="true"
+     aria-label="Certificate preview">
+
+    <button class="close-modal" id="closeModal"
+            aria-label="Close certificate">✕</button>
+
+    <img id="modalImage" src="" alt="Full certificate preview">
+</div>
+
+<!-- BACK TO TOP -->
+<button id="backToTop" aria-label="Back to top"
+        title="Back to top">↑</button>
+
+<script>
+    // 1. DARK AND LIGHT MODE
+    const themeToggle = document.getElementById("themeToggle");
+
+    function applyTheme(theme) {
+        const isLight = theme === "light";
+
+        document.body.classList.toggle("light", isLight);
+        themeToggle.textContent = isLight ? "🌙" : "☀️";
+
+        themeToggle.setAttribute(
+            "aria-label",
+            isLight ? "Switch to dark mode" : "Switch to light mode"
+        );
+
+        document.querySelector('meta[name="theme-color"]')
+            .setAttribute("content", isLight ? "#f4f7fb" : "#070b14");
+    }
+
+    let savedTheme = "dark";
+
+    try {
+        savedTheme = localStorage.getItem("nayanaPortfolioTheme") || "dark";
+    } catch (error) {
+        // The theme toggle still works without browser storage.
+    }
+
+    applyTheme(savedTheme);
+
+    themeToggle.addEventListener("click", function () {
+        const newTheme = document.body.classList.contains("light")
+            ? "dark"
+            : "light";
+
+        applyTheme(newTheme);
+
+        try {
+            localStorage.setItem("nayanaPortfolioTheme", newTheme);
+        } catch (error) {
+            // Theme is applied for the current page session.
+        }
+    });
+
+    // 2. MOBILE NAVIGATION
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    function closeMenu() {
+        navLinks.classList.remove("open");
+        menuToggle.textContent = "☰";
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+    }
+
+    menuToggle.addEventListener("click", function () {
+        const isOpen = navLinks.classList.toggle("open");
+
+        menuToggle.textContent = isOpen ? "✕" : "☰";
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen ? "Close navigation menu" : "Open navigation menu"
+        );
+    });
+
+    navLinks.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+    });
+
+    // 3. TYPING TEXT EFFECT
+    const typingText = document.getElementById("typingText");
+
+    const roles = [
+        "BCA Student & Full Stack Developer",
+        "Web Development Learner",
+        "Aspiring Software Developer"
+    ];
+
+    let roleIndex = 0;
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setInterval(function () {
+            roleIndex = (roleIndex + 1) % roles.length;
+            typingText.textContent = roles[roleIndex];
+        }, 3000);
+    }
+
+    // 4. SCROLL REVEAL ANIMATIONS
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealElements.forEach(function (element) {
+            observer.observe(element);
+        });
+    } else {
+        revealElements.forEach(function (element) {
+            element.classList.add("visible");
+        });
+    }
+
+    // 5. ACTIVE NAVIGATION LINK
+    const sections = document.querySelectorAll("main section[id]");
+    const navItems = document.querySelectorAll(".nav-links a");
+
+    if ("IntersectionObserver" in window) {
+        const sectionObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    navItems.forEach(function (link) {
+                        const isActive =
+                            link.getAttribute("href") === "#" + entry.target.id;
+
+                        link.classList.toggle("active", isActive);
+
+                        if (isActive) {
+                            link.setAttribute("aria-current", "location");
+                        } else {
+                            link.removeAttribute("aria-current");
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: "-25% 0px -60% 0px" });
+
+        sections.forEach(function (section) {
+            sectionObserver.observe(section);
+        });
+    }
+
+    // 6. CERTIFICATE PREVIEW
+    const certificateModal = document.getElementById("certificateModal");
+    const modalImage = document.getElementById("modalImage");
+    const closeModal = document.getElementById("closeModal");
+
+    let previousFocus = null;
+
+    document.querySelectorAll(".view-certificate").forEach(function (button) {
+        button.addEventListener("click", function () {
+            previousFocus = button;
+
+            modalImage.src = button.dataset.image;
+            certificateModal.classList.add("open");
+            document.body.style.overflow = "hidden";
+
+            closeModal.focus();
+        });
+    });
+
+    function closeCertificate() {
+        certificateModal.classList.remove("open");
+        modalImage.src = "";
+        document.body.style.overflow = "";
+
+        if (previousFocus) {
+            previousFocus.focus();
+        }
+    }
+
+    closeModal.addEventListener("click", closeCertificate);
+
+    certificateModal.addEventListener("click", function (event) {
+        if (event.target === certificateModal) {
+            closeCertificate();
+        }
+    });
+
+    // 7. CONTACT FORM VALIDATION
+    // Prepares an email; it does not send it directly from the website.
+    document.getElementById("contactForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+        const formMessage = document.getElementById("formMessage");
+
+        if (!name || !email || !message) {
+            formMessage.textContent = "Please complete all fields.";
+            return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            formMessage.textContent = "Please enter a valid email address.";
+            return;
+        }
+
+        const subject = encodeURIComponent("Portfolio contact from " + name);
+        const body = encodeURIComponent(
+            "Name: " + name +
+            "\nEmail: " + email +
+            "\n\nMessage:\n" + message
+        );
+
+        formMessage.textContent =
+            "Your email application will open with the message prepared.";
+
+        window.location.href =
+            "mailto:nayanak@gmail.com?subject=" + subject + "&body=" + body;
+    });
+
+    // 8. BACK-TO-TOP BUTTON
+    const backToTop = document.getElementById("backToTop");
+
+    function updateBackToTop() {
+        backToTop.classList.toggle("show", window.scrollY > 300);
+    }
+
+    window.addEventListener("scroll", updateBackToTop, { passive: true });
+    updateBackToTop();
+
+    backToTop.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                ? "auto"
+                : "smooth"
+        });
+    });
+
+    // CLOSE MENU AND MODAL WITH ESCAPE
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            closeMenu();
+
+            if (certificateModal.classList.contains("open")) {
+                closeCertificate();
+            }
+        }
+    });
+
+    // 9. CURRENT YEAR
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+</script>
+
+</body>
+</html>
